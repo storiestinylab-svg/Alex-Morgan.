@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" content="Alex Morgan – Creative Web Developer & Designer specializing in modern, fast, beautiful web experiences."/>
+<title>Alex Morgan – Creative Web Developer & Designer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+/* ============================================================
+   TOKENS
+============================================================ */
+:root {
+  --navy: #0A0F1E;
+  --navy-mid: #111827;
+  --navy-light: #1A2238;
+  --indigo: #5B21B6;
+  --indigo-bright: #7C3AED;
+  --cyan: #00D4FF;
+  --cyan-dim: rgba(0,212,255,0.15);
+  --white: #F0F4FF;
+  --muted: #94A3B8;
+  --glass: rgba(255,255,255,0.04);
+  --glass-border: rgba(255,255,255,0.08);
+  --glass-hover: rgba(255,255,255,0.08);
+  --radius: 16px;
+  --radius-lg: 24px;
+  --shadow: 0 8px 32px rgba(0,0,0,0.4);
+  --transition: 0.3s cubic-bezier(0.4,0,0.2,1);
+
+  /* Theme tokens */
+  --bg: var(--navy);
+  --bg-section: var(--navy-mid);
+  --text: var(--white);
+  --text-muted: var(--muted);
+  --card-bg: var(--glass);
+  --card-border: var(--glass-border);
+}
+
+[data-theme="light"] {
+  --bg: #F8FAFF;
+  --bg-section: #EEF2FF;
+  --text: #0A0F1E;
+  --text-muted: #475569;
+  --card-bg: rgba(255,255,255,0.8);
+  --card-border: rgba(91,33,182,0.15);
+  --glass: rgba(255,255,255,0.8);
+  --glass-border: rgba(91,33,182,0.15);
+  --shadow: 0 8px 32px rgba(91,33,182,0.12);
+}
+
+/* ============================================================
+   RESET & BASE
+============================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  overflow-x: hidden;
+  transition: background var(--transition), color var(--transition);
+}
+a { text-decoration: none; color: inherit; }
+img { max-width: 100%; display: block; }
+ul { list-style: none; }
+
+/* ============================================================
+   TYPOGRAPHY
+============================================================ */
+.display {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+.label-eyebrow {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--cyan);
+}
+
+/* ============================================================
+   SCROLLBAR
+============================================================ */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--indigo); border-radius: 3px; }
+
+/* ============================================================
+   NAV
+============================================================ */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1rem 6%;
+  backdrop-filter: blur(20px);
+  background: rgba(10,15,30,0.8);
+  border-bottom: 1px solid var(--glass-border);
+  transition: background var(--transition);
+}
+[data-theme="light"] nav { background: rgba(248,250,255,0.85); }
+.nav-logo {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700; font-size: 1.4rem;
+  background: linear-gradient(135deg, var(--cyan), var(--indigo-bright));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.nav-links { display: flex; gap: 2rem; align-items: center; }
+.nav-links a {
+  font-size: 0.9rem; font-weight: 500;
+  color: var(--text-muted);
+  transition: color var(--transition);
+  position: relative;
+}
+.nav-links a::after {
+  content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px;
+  background: var(--cyan); transition: width var(--transition);
+}
+.nav-links a:hover { color: var(--text); }
+.nav-links a:hover::after { width: 100%; }
+.nav-right { display: flex; align-items: center; gap: 1rem; }
+#theme-toggle {
+  background: var(--glass); border: 1px solid var(--card-border);
+  border-radius: 50px; padding: 0.4rem 0.8rem;
+  cursor: pointer; font-size: 1rem; transition: all var(--transition);
+  color: var(--text);
+}
+#theme-toggle:hover { background: var(--glass-hover); }
+.hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+.hamburger span { display: block; width: 24px; height: 2px; background: var(--text); border-radius: 2px; transition: all var(--transition); }
+
+/* ============================================================
+   BUTTONS
+============================================================ */
+.btn {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0.75rem 1.75rem; border-radius: 50px;
+  font-family: 'Inter', sans-serif; font-weight: 600; font-size: 0.9rem;
+  cursor: pointer; transition: all var(--transition); border: none;
+}
+.btn-primary {
+  background: linear-gradient(135deg, var(--indigo-bright), var(--cyan));
+  color: #fff;
+  box-shadow: 0 4px 24px rgba(91,33,182,0.4);
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(91,33,182,0.6);
+}
+.btn-ghost {
+  background: transparent;
+  border: 1px solid var(--card-border);
+  color: var(--text);
+}
+.btn-ghost:hover {
+  background: var(--glass-hover);
+  border-color: var(--cyan);
+  color: var(--cyan);
+  transform: translateY(-2px);
+}
+
+/* ============================================================
+   SECTIONS
+============================================================ */
+section { padding: 6rem 6%; }
+section:nth-child(even) { background: var(--bg-section); }
+.section-header { text-align: center; margin-bottom: 3.5rem; }
+.section-header h2 { font-family: 'Space Grotesk', sans-serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; margin-top: 0.5rem; }
+.section-header p { color: var(--text-muted); max-width: 500px; margin: 0.75rem auto 0; }
+
+/* ============================================================
+   HERO
+============================================================ */
+#hero {
+  min-height: 100vh; padding: 0;
+  display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+}
+.hero-mesh {
+  position: absolute; inset: 0; z-index: 0;
+  background: radial-gradient(ellipse 80% 60% at 20% 40%, rgba(91,33,182,0.35) 0%, transparent 60%),
+              radial-gradient(ellipse 60% 50% at 80% 60%, rgba(0,212,255,0.2) 0%, transparent 55%),
+              radial-gradient(ellipse 50% 40% at 50% 90%, rgba(91,33,182,0.2) 0%, transparent 50%);
+  animation: meshPulse 8s ease-in-out infinite alternate;
+}
+@keyframes meshPulse {
+  0% { opacity: 0.7; transform: scale(1); }
+  100% { opacity: 1; transform: scale(1.05); }
+}
+.hero-grid-lines {
+  position: absolute; inset: 0; z-index: 0;
+  background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+[data-theme="light"] .hero-grid-lines {
+  background-image: linear-gradient(rgba(91,33,182,0.06) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(91,33,182,0.06) 1px, transparent 1px);
+}
+.hero-content {
+  position: relative; z-index: 1;
+  text-align: center; padding: 2rem 6%;
+  max-width: 900px;
+}
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: var(--glass); border: 1px solid var(--glass-border);
+  backdrop-filter: blur(10px);
+  border-radius: 50px; padding: 0.5rem 1.25rem;
+  font-size: 0.85rem; color: var(--cyan); font-weight: 500;
+  margin-bottom: 1.5rem;
+  animation: fadeDown 0.6s ease forwards;
+}
+.hero-badge span { width: 8px; height: 8px; background: var(--cyan); border-radius: 50%; animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100%{ opacity:1; transform:scale(1); } 50%{ opacity:0.5; transform:scale(0.8); } }
+.hero-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(2.8rem, 7vw, 5.5rem);
+  font-weight: 700; line-height: 1.08; letter-spacing: -0.04em;
+  margin-bottom: 1.25rem;
+  animation: fadeUp 0.7s 0.1s ease both;
+}
+.hero-title .gradient-text {
+  background: linear-gradient(135deg, var(--cyan) 0%, var(--indigo-bright) 50%, #FF6B9D 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero-sub {
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  color: var(--text-muted); max-width: 540px; margin: 0 auto 2.5rem;
+  animation: fadeUp 0.7s 0.2s ease both;
+}
+.hero-cta { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; animation: fadeUp 0.7s 0.3s ease both; }
+.hero-stats {
+  display: flex; gap: 3rem; justify-content: center; margin-top: 4rem;
+  animation: fadeUp 0.7s 0.4s ease both;
+  flex-wrap: wrap;
+}
+.stat { text-align: center; }
+.stat-num { font-family: 'Space Grotesk', sans-serif; font-size: 2.2rem; font-weight: 700; color: var(--cyan); line-height: 1; }
+.stat-label { font-size: 0.8rem; color: var(--text-muted); margin-top: 0.25rem; text-transform: uppercase; letter-spacing: 0.1em; }
+.scroll-indicator {
+  position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+  animation: bounce 2s infinite; z-index: 1;
+}
+.scroll-indicator span { font-size: 0.75rem; color: var(--text-muted); letter-spacing: 0.1em; text-transform: uppercase; }
+.scroll-line { width: 1px; height: 40px; background: linear-gradient(to bottom, var(--cyan), transparent); }
+@keyframes bounce { 0%,100%{ transform:translateX(-50%) translateY(0); } 50%{ transform:translateX(-50%) translateY(8px); } }
+
+/* ============================================================
+   ABOUT
+============================================================ */
+#about { background: var(--bg-section); }
+.about-grid { display: grid; grid-template-columns: 1fr 1.6fr; gap: 4rem; align-items: center; max-width: 1100px; margin: 0 auto; }
+.about-img-wrap { position: relative; }
+.about-img-card {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--indigo), var(--cyan));
+  padding: 3px;
+}
+.about-img-inner {
+  border-radius: calc(var(--radius-lg) - 3px);
+  overflow: hidden;
+  background: var(--navy-light);
+  height: 420px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 7rem;
+  user-select: none;
+}
+.about-float-badge {
+  position: absolute; bottom: -1rem; right: -1rem;
+  background: linear-gradient(135deg, var(--indigo-bright), var(--cyan));
+  color: #fff; border-radius: var(--radius);
+  padding: 1rem 1.5rem; text-align: center;
+  box-shadow: var(--shadow);
+}
+.about-float-badge .num { font-family: 'Space Grotesk', sans-serif; font-size: 2rem; font-weight: 700; }
+.about-float-badge .lbl { font-size: 0.75rem; opacity: 0.85; }
+.about-text h2 { font-family: 'Space Grotesk', sans-serif; font-size: clamp(1.8rem,3vw,2.5rem); font-weight: 700; margin: 0.5rem 0 1rem; }
+.about-text p { color: var(--text-muted); margin-bottom: 1.25rem; }
+.skills-grid { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.5rem; }
+.skill-tag {
+  background: var(--glass); border: 1px solid var(--card-border);
+  border-radius: 50px; padding: 0.4rem 1rem;
+  font-size: 0.82rem; font-weight: 500; color: var(--text);
+  transition: all var(--transition);
+}
+.skill-tag:hover { background: var(--cyan-dim); border-color: var(--cyan); color: var(--cyan); }
+
+/* ============================================================
+   SERVICES
+============================================================ */
+.services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap: 1.5rem; max-width: 1100px; margin: 0 auto; }
+.service-card {
+  background: var(--card-bg); border: 1px solid var(--card-border);
+  border-radius: var(--radius-lg); padding: 2rem;
+  backdrop-filter: blur(12px);
+  transition: all var(--transition);
+  cursor: default; position: relative; overflow: hidden;
+}
+.service-card::before {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(91,33,182,0.06), rgba(0,212,255,0.06));
+  opacity: 0; transition: opacity var(--transition);
+}
+.service-card:hover { transform: translateY(-6px); box-shadow: 0 20px 60px rgba(91,33,182,0.2); border-color: rgba(0,212,255,0.3); }
+.service-card:hover::before { opacity: 1; }
+.service-icon { font-size: 2.5rem; margin-bottom: 1rem; display: block; }
+.service-card h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.2rem; font-weight: 600; margin-bottom: 0.75rem; }
+.service-card p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.7; }
+
+/* ============================================================
+   PROJECTS
+============================================================ */
+#projects { background: var(--bg-section); }
+.filter-bar { display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap; margin-bottom: 2.5rem; }
+.filter-btn {
+  padding: 0.5rem 1.25rem; border-radius: 50px;
+  background: var(--glass); border: 1px solid var(--card-border);
+  font-size: 0.85rem; font-weight: 500; color: var(--text-muted);
+  cursor: pointer; transition: all var(--transition);
+}
+.filter-btn.active, .filter-btn:hover {
+  background: linear-gradient(135deg, var(--indigo-bright), var(--cyan));
+  border-color: transparent; color: #fff;
+}
+.projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px,1fr)); gap: 1.75rem; max-width: 1100px; margin: 0 auto; }
+.project-card {
+  background: var(--card-bg); border: 1px solid var(--card-border);
+  border-radius: var(--radius-lg); overflow: hidden;
+  backdrop-filter: blur(12px);
+  transition: all var(--transition);
+  position: relative;
+}
+.project-card:hover { transform: translateY(-8px); box-shadow: 0 24px 60px rgba(0,0,0,0.3); border-color: rgba(0,212,255,0.2); }
+.project-thumb {
+  height: 200px; display: flex; align-items: center; justify-content: center;
+  font-size: 4rem; position: relative; overflow: hidden;
+}
+.project-thumb-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(91,33,182,0.5), rgba(0,212,255,0.3));
+  opacity: 0; transition: opacity var(--transition);
+  display: flex; align-items: center; justify-content: center; gap: 1rem;
+}
+.project-card:hover .project-thumb-overlay { opacity: 1; }
+.project-info { padding: 1.5rem; }
+.project-tags { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 0.75rem; }
+.project-tag { font-size: 0.7rem; font-weight: 600; color: var(--cyan); background: var(--cyan-dim); padding: 0.2rem 0.6rem; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.05em; }
+.project-info h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem; }
+.project-info p { font-size: 0.875rem; color: var(--text-muted); margin-bottom: 1rem; }
+.project-links { display: flex; gap: 0.75rem; }
+.project-link {
+  flex: 1; text-align: center; padding: 0.5rem;
+  border-radius: 10px; font-size: 0.82rem; font-weight: 600;
+  transition: all var(--transition);
+}
+.project-link.demo { background: linear-gradient(135deg, var(--indigo-bright), var(--cyan)); color: #fff; }
+.project-link.github { background: var(--glass); border: 1px solid var(--card-border); color: var(--text); }
+.project-link:hover { transform: translateY(-2px); }
+.project-hidden { display: none; }
+
+/* ============================================================
+   TESTIMONIALS
+============================================================ */
+.testimonials-wrap { max-width: 900px; margin: 0 auto; position: relative; overflow: hidden; }
+.testimonials-track { display: flex; transition: transform 0.5s cubic-bezier(0.4,0,0.2,1); }
+.testimonial-slide { min-width: 100%; }
+.testimonial-card {
+  background: var(--card-bg); border: 1px solid var(--card-border);
+  border-radius: var(--radius-lg); padding: 2.5rem;
+  backdrop-filter: blur(12px); text-align: center;
+  margin: 0 1rem;
+}
+.stars { color: #FBBF24; font-size: 1.2rem; margin-bottom: 1.25rem; letter-spacing: 2px; }
+.testimonial-text { font-size: 1.05rem; color: var(--text); font-style: italic; line-height: 1.8; margin-bottom: 1.75rem; }
+.testimonial-author { display: flex; align-items: center; justify-content: center; gap: 1rem; }
+.author-avatar { width: 52px; height: 52px; border-radius: 50%; background: linear-gradient(135deg, var(--indigo-bright), var(--cyan)); display: flex; align-items: center; justify-content: center; font-size: 1.4rem; font-weight: 700; color: #fff; font-family: 'Space Grotesk', sans-serif; }
+.author-info { text-align: left; }
+.author-name { font-weight: 600; font-size: 0.95rem; }
+.author-role { font-size: 0.8rem; color: var(--text-muted); }
+.slider-controls { display: flex; align-items: center; justify-content: center; gap: 1rem; margin-top: 2rem; }
+.slider-btn {
+  width: 44px; height: 44px; border-radius: 50%;
+  background: var(--glass); border: 1px solid var(--card-border);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; font-size: 1.1rem; transition: all var(--transition); color: var(--text);
+}
+.slider-btn:hover { background: var(--glass-hover); border-color: var(--cyan); }
+.slider-dots { display: flex; gap: 0.5rem; }
+.dot { width: 8px; height: 8px; border-radius: 50%; background: var(--card-border); cursor: pointer; transition: all var(--transition); }
+.dot.active { background: var(--cyan); width: 24px; border-radius: 4px; }
+
+/* ============================================================
+   CONTACT
+============================================================ */
+#contact { background: var(--bg-section); }
+.contact-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 4rem; max-width: 1000px; margin: 0 auto; }
+.contact-info h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.4rem; font-weight: 600; margin-bottom: 1rem; }
+.contact-info p { color: var(--text-muted); margin-bottom: 2rem; }
+.contact-item { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.25rem; }
+.contact-icon { width: 44px; height: 44px; border-radius: 12px; background: var(--glass); border: 1px solid var(--card-border); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
+.contact-item-text a { color: var(--text); transition: color var(--transition); }
+.contact-item-text a:hover { color: var(--cyan); }
+.contact-item-text .clabel { font-size: 0.75rem; color: var(--text-muted); }
+.social-links { display: flex; gap: 0.75rem; margin-top: 2rem; }
+.social-btn {
+  width: 44px; height: 44px; border-radius: 12px;
+  background: var(--glass); border: 1px solid var(--card-border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.1rem; cursor: pointer; transition: all var(--transition);
+  color: var(--text); text-decoration: none;
+}
+.social-btn:hover { background: var(--glass-hover); border-color: var(--cyan); transform: translateY(-3px); }
+.whatsapp-btn {
+  display: flex; align-items: center; gap: 0.6rem;
+  padding: 0.8rem 1.5rem; border-radius: 50px;
+  background: #25D366; color: #fff; font-weight: 600; font-size: 0.9rem;
+  cursor: pointer; transition: all var(--transition); margin-bottom: 1.5rem;
+  border: none; width: fit-content;
+}
+.whatsapp-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(37,211,102,0.4); }
+.contact-form { display: flex; flex-direction: column; gap: 1rem; }
+.form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+.form-group label { font-size: 0.82rem; font-weight: 500; color: var(--text-muted); }
+.form-group input, .form-group textarea {
+  background: var(--card-bg); border: 1px solid var(--card-border);
+  border-radius: var(--radius); padding: 0.85rem 1.1rem;
+  font-family: 'Inter', sans-serif; font-size: 0.9rem; color: var(--text);
+  outline: none; transition: all var(--transition); resize: none;
+}
+.form-group input:focus, .form-group textarea:focus { border-color: var(--cyan); background: var(--glass-hover); box-shadow: 0 0 0 3px rgba(0,212,255,0.1); }
+.form-group input::placeholder, .form-group textarea::placeholder { color: var(--text-muted); opacity: 0.6; }
+.form-success { display: none; background: rgba(37,211,102,0.1); border: 1px solid rgba(37,211,102,0.3); border-radius: var(--radius); padding: 1rem; text-align: center; color: #25D366; font-weight: 500; }
+
+/* ============================================================
+   FOOTER
+============================================================ */
+footer {
+  background: var(--navy-light); border-top: 1px solid var(--card-border);
+  padding: 3rem 6%;
+  display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 3rem;
+}
+[data-theme="light"] footer { background: #E8EDFF; }
+.footer-brand p { color: var(--text-muted); font-size: 0.88rem; margin-top: 0.75rem; max-width: 260px; }
+.footer-col h4 { font-family: 'Space Grotesk', sans-serif; font-size: 0.85rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 1rem; }
+.footer-col ul { display: flex; flex-direction: column; gap: 0.6rem; }
+.footer-col ul li a { font-size: 0.88rem; color: var(--text-muted); transition: color var(--transition); }
+.footer-col ul li a:hover { color: var(--cyan); }
+.footer-bottom {
+  background: var(--navy); border-top: 1px solid var(--card-border);
+  padding: 1.25rem 6%;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 1rem;
+}
+[data-theme="light"] .footer-bottom { background: #D4DCF7; }
+.footer-bottom p { font-size: 0.82rem; color: var(--text-muted); }
+.footer-bottom span { color: #FF6B9D; }
+
+/* ============================================================
+   ANIMATIONS
+============================================================ */
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(30px); }
+  to { opacity:1; transform:translateY(0); }
+}
+@keyframes fadeDown {
+  from { opacity:0; transform:translateY(-20px); }
+  to { opacity:1; transform:translateY(0); }
+}
+.reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ============================================================
+   RESPONSIVE
+============================================================ */
+@media (max-width: 900px) {
+  .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+  .about-img-wrap { max-width: 340px; margin: 0 auto; }
+  footer { grid-template-columns: 1fr 1fr; }
+  .nav-links { display: none; flex-direction: column; position: fixed; top: 70px; left: 0; right: 0; background: var(--navy-mid); padding: 2rem; gap: 1.5rem; border-bottom: 1px solid var(--card-border); }
+  [data-theme="light"] .nav-links { background: #F8FAFF; }
+  .nav-links.open { display: flex; }
+  .hamburger { display: flex; }
+}
+@media (max-width: 600px) {
+  section { padding: 4rem 5%; }
+  .hero-stats { gap: 1.5rem; }
+  footer { grid-template-columns: 1fr; gap: 2rem; }
+  .footer-bottom { flex-direction: column; text-align: center; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     NAV
+============================================================ -->
+<nav id="navbar">
+  <a href="#hero" class="nav-logo">AM.</a>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="#about" onclick="closeMenu()">About</a></li>
+    <li><a href="#services" onclick="closeMenu()">Services</a></li>
+    <li><a href="#projects" onclick="closeMenu()">Projects</a></li>
+    <li><a href="#testimonials" onclick="closeMenu()">Testimonials</a></li>
+    <li><a href="#contact" onclick="closeMenu()">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <button id="theme-toggle" aria-label="Toggle theme">🌙</button>
+    <div class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- ============================================================
+     HERO
+============================================================ -->
+<section id="hero">
+  <div class="hero-mesh"></div>
+  <div class="hero-grid-lines"></div>
+  <div class="hero-content">
+    <div class="hero-badge"><span></span> Available for freelance projects</div>
+    <h1 class="hero-title display">
+      Hi, I'm <span class="gradient-text">Alex Morgan</span><br>
+      Creative Web Developer<br>& Designer
+    </h1>
+    <p class="hero-sub">I craft beautiful, high-performance web experiences that turn ideas into digital reality — from concept to pixel-perfect code.</p>
+    <div class="hero-cta">
+      <a href="#projects" class="btn btn-primary">View My Work →</a>
+      <a href="#contact" class="btn btn-ghost">Contact Me</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><div class="stat-num">5+</div><div class="stat-label">Years Experience</div></div>
+      <div class="stat"><div class="stat-num">80+</div><div class="stat-label">Projects Delivered</div></div>
+      <div class="stat"><div class="stat-num">98%</div><div class="stat-label">Client Satisfaction</div></div>
+      <div class="stat"><div class="stat-num">12+</div><div class="stat-label">Happy Clients</div></div>
+    </div>
+  </div>
+  <div class="scroll-indicator">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ============================================================
+     ABOUT
+============================================================ -->
+<section id="about">
+  <div class="about-grid reveal">
+    <div class="about-img-wrap">
+      <div class="about-img-card">
+        <div class="about-img-inner">👨‍💻</div>
+      </div>
+      <div class="about-float-badge">
+        <div class="num">80+</div>
+        <div class="lbl">Projects Done</div>
+      </div>
+    </div>
+    <div class="about-text">
+      <p class="label-eyebrow">About Me</p>
+      <h2>Turning Vision Into<br>Digital Experience</h2>
+      <p>I'm a full-stack web developer and UI/UX designer with 5+ years of experience crafting modern, responsive, and performant web applications. I combine clean code with thoughtful design to create digital products that people love to use.</p>
+      <p>When I'm not pushing pixels or writing code, I'm exploring new design trends, contributing to open source, and mentoring emerging developers.</p>
+      <div class="skills-grid">
+        <span class="skill-tag">HTML / CSS</span>
+        <span class="skill-tag">JavaScript</span>
+        <span class="skill-tag">React.js</span>
+        <span class="skill-tag">Next.js</span>
+        <span class="skill-tag">Node.js</span>
+        <span class="skill-tag">Tailwind CSS</span>
+        <span class="skill-tag">UI/UX Design</span>
+        <span class="skill-tag">Figma</span>
+        <span class="skill-tag">SEO</span>
+        <span class="skill-tag">WordPress</span>
+        <span class="skill-tag">REST APIs</span>
+        <span class="skill-tag">Git</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SERVICES
+============================================================ -->
+<section id="services">
+  <div class="section-header reveal">
+    <p class="label-eyebrow">What I Do</p>
+    <h2>Services I Offer</h2>
+    <p>Comprehensive web solutions designed to elevate your brand and drive results.</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card reveal"><span class="service-icon">🎨</span><h3>Website Design</h3><p>Stunning, user-centric website designs that reflect your brand identity and engage your audience from the first click.</p></div>
+    <div class="service-card reveal" style="transition-delay:0.1s"><span class="service-icon">⚡</span><h3>Frontend Development</h3><p>High-performance, responsive frontends built with modern frameworks. Clean code, pixel-perfect implementation, lightning-fast delivery.</p></div>
+    <div class="service-card reveal" style="transition-delay:0.2s"><span class="service-icon">✦</span><h3>UI/UX Design</h3><p>Intuitive interfaces and seamless user experiences backed by research, wireframes, and interactive prototypes.</p></div>
+    <div class="service-card reveal" style="transition-delay:0.0s"><span class="service-icon">🚀</span><h3>Landing Page Creation</h3><p>Conversion-optimized landing pages crafted to capture leads, showcase products, and drive measurable business results.</p></div>
+    <div class="service-card reveal" style="transition-delay:0.1s"><span class="service-icon">🛍️</span><h3>E-commerce Website</h3><p>Full-featured online stores with smooth checkout flows, secure payments, and inventory management that scale with your business.</p></div>
+    <div class="service-card reveal" style="transition-delay:0.2s"><span class="service-icon">🔍</span><h3>SEO Optimization</h3><p>Technical SEO, performance audits, and on-page optimization to boost your visibility and rank higher on search engines.</p></div>
+  </div>
+</section>
+
+<!-- ============================================================
+     PROJECTS
+============================================================ -->
+<section id="projects">
+  <div class="section-header reveal">
+    <p class="label-eyebrow">My Work</p>
+    <h2>Featured Projects</h2>
+    <p>A selection of recent projects that showcase my range and craft.</p>
+  </div>
+  <div class="filter-bar reveal">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="web">Web</button>
+    <button class="filter-btn" data-filter="ui">UI/UX</button>
+    <button class="filter-btn" data-filter="app">App</button>
+  </div>
+  <div class="projects-grid">
+    <div class="project-card reveal" data-cat="web">
+      <div class="project-thumb" style="background:linear-gradient(135deg,#1A2238,#2D1F5E)">🛒
+        <div class="project-thumb-overlay">
+          <a href="#" class="btn btn-primary" style="padding:0.5rem 1rem;font-size:0.8rem">Live Demo</a>
+          <a href="#" class="btn btn-ghost" style="padding:0.5rem 1rem;font-size:0.8rem">GitHub</a>
+        </div>
+      </div>
+      <div class="project-info">
+        <div class="project-tags"><span class="project-tag">Web</span><span class="project-tag">React</span></div>
+        <h3>ShopFlow E-commerce</h3>
+        <p>A full-featured online store with cart, checkout, Stripe payments, and admin dashboard.</p>
+        <div class="project-links">
+          <a href="#" class="project-link demo">Live Demo</a>
+          <a href="#" class="project-link github">GitHub</a>
+        </div>
+      </div>
+    </div>
+    <div class="project-card reveal" data-cat="ui" style="transition-delay:0.1s">
+      <div class="project-thumb" style="background:linear-gradient(135deg,#0F2027,#203A43)">📱
+        <div class="project-thumb-overlay">
+          <a href="#" class="btn btn-primary" style="padding:0.5rem 1rem;font-size:0.8rem">Live Demo</a>
+          <a href="#" class="btn btn-ghost" style="padding:0.5rem 1rem;font-size:0.8rem">GitHub</a>
+        </div>
+      </div>
+      <div class="project-info">
+        <div class="project-tags"><span class="project-tag">UI/UX</span><span class="project-tag">Figma</span></div>
+        <h3>Fintech Dashboard UI</h3>
+        <p>A sleek banking dashboard with real-time analytics, transactions, and dark mode support.</p>
+        <div class="project-links">
+          <a href="#" class="project-link demo">Live Demo</a>
+          <a href="#" class="project-link github">GitHub</a>
+        </div>
+      </div>
+    </div>
+    <div class="project-card reveal" data-cat="app" style="transition-delay:0.2s">
+      <div class="project-thumb" style="background:linear-gradient(135deg,#1F0035,#003040)">✅
+        <div class="project-thumb-overlay">
+          <a href="#" class="btn btn-primary" style="padding:0.5rem 1rem;font-size:0.8rem">Live Demo</a>
+          <a href="#" class="btn btn-ghost" style="padding:0.5rem 1rem;font-size:0.8rem">GitHub</a>
+        </div>
+      </div>
+      <div class="project-info">
+        <div class="project-tags"><span class="project-tag">App</span><span class="project-tag">Next.js</span></div>
+        <h3>TaskMaster Pro</h3>
+        <p>A productivity app with Kanban boards, team collaboration, and deadline tracking.</p>
+        <div class="project-links">
+          <a href="#" class="project-link demo">Live Demo</a>
+          <a href="#" class="project-link github">GitHub</a>
+        </div>
+      </div>
+    </div>
+    <div class="project-card reveal" data-cat="web" style="transition-delay:0.0s">
+      <div class="project-thumb" style="background:linear-gradient(135deg,#0D1B2A,#1B2838)">🏥
+        <div class="project-thumb-overlay">
+          <a href="#" class="btn btn-primary" style="padding:0.5rem 1rem;font-size:0.8rem">Live Demo</a>
+          <a href="#" class="btn btn-ghost" style="padding:0.5rem 1rem;font-size:0.8rem">GitHub</a>
+        </div>
+      </div>
+      <div class="project-info">
+        <div class="project-tags"><span class="project-tag">Web</span><span class="project-tag">SEO</span></div>
+        <h3>MediCare Landing Page</h3>
+        <p>High-converting healthcare landing page with appointment booking and patient portal.</p>
+        <div class="project-links">
+          <a href="#" class="project-link demo">Live Demo</a>
+          <a href="#" class="project-link github">GitHub</a>
+        </div>
+      </div>
+    </div>
+    <div class="project-card reveal" data-cat="ui" style="transition-delay:0.1s">
+      <div class="project-thumb" style="background:linear-gradient(135deg,#200122,#6f0000)">🎵
+        <div class="project-thumb-overlay">
+          <a href="#" class="btn btn-primary" style="padding:0.5rem 1rem;font-size:0.8rem">Live Demo</a>
+          <a href="#" class="btn btn-ghost" style="padding:0.5rem 1rem;font-size:0.8rem">GitHub</a>
+        </div>
+      </div>
+      <div class="project-info">
+        <div class="project-tags"><span class="project-tag">UI/UX</span><span class="project-tag">App</span></div>
+        <h3>BeatBox Music App</h3>
+        <p>A music streaming app UI with playlist management, equalizer, and social sharing features.</p>
+        <div class="project-links">
+          <a href="#" class="project-link demo">Live Demo</a>
+          <a href="#" class="project-link github">GitHub</a>
+        </div>
+      </div>
+    </div>
+    <div class="project-card reveal" data-cat="app" style="transition-delay:0.2s">
+      <div class="project-thumb" style="background:linear-gradient(135deg,#003300,#002233)">📊
+        <div class="project-thumb-overlay">
+          <a href="#" class="btn btn-primary" style="padding:0.5rem 1rem;font-size:0.8rem">Live Demo</a>
+          <a href="#" class="btn btn-ghost" style="padding:0.5rem 1rem;font-size:0.8rem">GitHub</a>
+        </div>
+      </div>
+      <div class="project-info">
+        <div class="project-tags"><span class="project-tag">App</span><span class="project-tag">API</span></div>
+        <h3>DataPulse Analytics</h3>
+        <p>Real-time business analytics dashboard with charts, custom reports, and data export.</p>
+        <div class="project-links">
+          <a href="#" class="project-link demo">Live Demo</a>
+          <a href="#" class="project-link github">GitHub</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     TESTIMONIALS
+============================================================ -->
+<section id="testimonials">
+  <div class="section-header reveal">
+    <p class="label-eyebrow">Client Love</p>
+    <h2>What They Say</h2>
+    <p>Feedback from clients I've had the pleasure to work with.</p>
+  </div>
+  <div class="testimonials-wrap reveal">
+    <div class="testimonials-track" id="testimonials-track">
+      <div class="testimonial-slide">
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p class="testimonial-text">"Alex completely transformed our online presence. The new website is not only visually stunning but also loads incredibly fast. Our conversion rate jumped 40% within the first month. Absolutely exceptional work!"</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">S</div>
+            <div class="author-info"><div class="author-name">Sarah Chen</div><div class="author-role">CEO, TechStart Inc.</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-slide">
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p class="testimonial-text">"Working with Alex was a fantastic experience from start to finish. He understood our vision immediately and delivered a product that exceeded every expectation. The attention to detail and UI polish is remarkable."</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">M</div>
+            <div class="author-info"><div class="author-name">Marcus Johnson</div><div class="author-role">Product Director, Nexora</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-slide">
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p class="testimonial-text">"Our e-commerce revenue doubled after the redesign. Alex's expertise in UX and performance optimization made our store fast, beautiful, and easy to use. I'd recommend him to anyone without hesitation."</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">A</div>
+            <div class="author-info"><div class="author-name">Aisha Patel</div><div class="author-role">Founder, StyleHive</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-slide">
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p class="testimonial-text">"Professional, creative, and incredibly skilled. Alex delivered our landing page on time and within budget. The design perfectly captured our brand and we saw a 60% increase in sign-ups. Exceptional value!"</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">R</div>
+            <div class="author-info"><div class="author-name">Ryan Torres</div><div class="author-role">Marketing Lead, CloudBase</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="slider-controls">
+      <button class="slider-btn" id="prev-btn">←</button>
+      <div class="slider-dots" id="slider-dots">
+        <div class="dot active"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
+      <button class="slider-btn" id="next-btn">→</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     CONTACT
+============================================================ -->
+<section id="contact">
+  <div class="section-header reveal">
+    <p class="label-eyebrow">Get In Touch</p>
+    <h2>Let's Work Together</h2>
+    <p>Have a project in mind? I'd love to hear about it. Let's create something great.</p>
+  </div>
+  <div class="contact-grid reveal">
+    <div class="contact-info">
+      <h3>Ready to Start?</h3>
+      <p>Whether you have a clear vision or just a spark of an idea, I'm here to help bring it to life. Let's talk.</p>
+      <a href="https://wa.me/+1234567890" class="whatsapp-btn" target="_blank">
+        <span>💬</span> Chat on WhatsApp
+      </a>
+      <div class="contact-item">
+        <div class="contact-icon">✉️</div>
+        <div class="contact-item-text">
+          <div class="clabel">Email</div>
+          <a href="mailto:hello@alexmorgan.dev">hello@alexmorgan.dev</a>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">📍</div>
+        <div class="contact-item-text">
+          <div class="clabel">Location</div>
+          <span>New York, NY — Remote Worldwide</span>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">⏱️</div>
+        <div class="contact-item-text">
+          <div class="clabel">Response Time</div>
+          <span>Usually within 24 hours</span>
+        </div>
+      </div>
+      <div class="social-links">
+        <a href="#" class="social-btn" title="GitHub">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.21 11.39.6.11.82-.26.82-.58v-2.03c-3.34.73-4.04-1.61-4.04-1.61-.54-1.38-1.33-1.75-1.33-1.75-1.09-.74.08-.73.08-.73 1.2.08 1.84 1.24 1.84 1.24 1.07 1.83 2.8 1.3 3.49 1 .11-.78.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.13-.3-.54-1.52.12-3.17 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 3-.4c1.02 0 2.04.14 3 .4 2.29-1.55 3.3-1.23 3.3-1.23.66 1.65.25 2.87.12 3.17.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.63-5.49 5.92.43.37.82 1.1.82 2.22v3.29c0 .32.22.7.83.58C20.57 21.79 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg>
+        </a>
+        <a href="#" class="social-btn" title="LinkedIn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14zM3.56 20.45h3.56V9H3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg>
+        </a>
+        <a href="#" class="social-btn" title="Facebook">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.07C24 5.41 18.63 0 12 0S0 5.41 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.04V9.41c0-3.02 1.8-4.7 4.54-4.7 1.31 0 2.68.24 2.68.24v2.97h-1.51c-1.49 0-1.95.93-1.95 1.88v2.27h3.32l-.53 3.49h-2.79V24C19.61 23.1 24 18.1 24 12.07z"/></svg>
+        </a>
+        <a href="mailto:hello@alexmorgan.dev" class="social-btn" title="Email">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg>
+        </a>
+      </div>
+    </div>
+    <form class="contact-form" id="contact-form">
+      <div class="form-group">
+        <label for="name">Your Name</label>
+        <input type="text" id="name" placeholder="John Smith" required/>
+      </div>
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" placeholder="john@example.com" required/>
+      </div>
+      <div class="form-group">
+        <label for="subject">Subject</label>
+        <input type="text" id="subject" placeholder="Project Inquiry"/>
+      </div>
+      <div class="form-group">
+        <label for="message">Message</label>
+        <textarea id="message" rows="5" placeholder="Tell me about your project..." required></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;padding:1rem">Send Message ✈️</button>
+      <div class="form-success" id="form-success">✅ Message sent! I'll be in touch soon.</div>
+    </form>
+  </div>
+</section>
+
+<!-- ============================================================
+     FOOTER
+============================================================ -->
+<footer>
+  <div class="footer-brand">
+    <div class="nav-logo">AM.</div>
+    <p>Building beautiful, fast, and user-friendly digital experiences that make a difference.</p>
+  </div>
+  <div class="footer-col">
+    <h4>Quick Links</h4>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#testimonials">Testimonials</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+  <div class="footer-col">
+    <h4>Services</h4>
+    <ul>
+      <li><a href="#services">Web Design</a></li>
+      <li><a href="#services">Frontend Dev</a></li>
+      <li><a href="#services">UI/UX Design</a></li>
+      <li><a href="#services">E-commerce</a></li>
+      <li><a href="#services">SEO</a></li>
+    </ul>
+  </div>
+</footer>
+<div class="footer-bottom">
+  <p>© 2025 Alex Morgan. Made with <span>♥</span> and lots of coffee.</p>
+  <p>Designed & Built by Alex Morgan</p>
+</div>
+
+<!-- ============================================================
+     JAVASCRIPT
+============================================================ -->
+<script>
+/* ---- Theme Toggle ---- */
+const toggle = document.getElementById('theme-toggle');
+const html = document.documentElement;
+const savedTheme = localStorage.getItem('theme') || 'dark';
+html.setAttribute('data-theme', savedTheme);
+toggle.textContent = savedTheme === 'dark' ? '🌙' : '☀️';
+toggle.addEventListener('click', () => {
+  const current = html.getAttribute('data-theme');
+  const next = current === 'dark' ? 'light' : 'dark';
+  html.setAttribute('data-theme', next);
+  toggle.textContent = next === 'dark' ? '🌙' : '☀️';
+  localStorage.setItem('theme', next);
+});
+
+/* ---- Mobile Menu ---- */
+function toggleMenu() {
+  const links = document.getElementById('nav-links');
+  links.classList.toggle('open');
+}
+function closeMenu() {
+  document.getElementById('nav-links').classList.remove('open');
+}
+
+/* ---- Scroll Reveal ---- */
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }});
+}, { threshold: 0.12 });
+reveals.forEach(el => observer.observe(el));
+
+/* ---- Project Filter ---- */
+const filterBtns = document.querySelectorAll('.filter-btn');
+const projectCards = document.querySelectorAll('.project-card');
+filterBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    filterBtns.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const filter = btn.dataset.filter;
+    projectCards.forEach(card => {
+      const cat = card.dataset.cat;
+      const show = filter === 'all' || cat === filter;
+      card.style.display = show ? '' : 'none';
+      card.style.opacity = show ? '1' : '0';
+    });
+  });
+});
+
+/* ---- Testimonials Slider ---- */
+let current = 0;
+const slides = document.querySelectorAll('.testimonial-slide');
+const track = document.getElementById('testimonials-track');
+const dots = document.querySelectorAll('.dot');
+let autoTimer;
+
+function goTo(n) {
+  current = (n + slides.length) % slides.length;
+  track.style.transform = `translateX(-${current * 100}%)`;
+  dots.forEach((d, i) => d.classList.toggle('active', i === current));
+}
+function startAuto() { autoTimer = setInterval(() => goTo(current + 1), 5000); }
+function stopAuto() { clearInterval(autoTimer); }
+
+document.getElementById('next-btn').addEventListener('click', () => { stopAuto(); goTo(current+1); startAuto(); });
+document.getElementById('prev-btn').addEventListener('click', () => { stopAuto(); goTo(current-1); startAuto(); });
+dots.forEach((d, i) => d.addEventListener('click', () => { stopAuto(); goTo(i); startAuto(); }));
+startAuto();
+
+/* ---- Contact Form ---- */
+document.getElementById('contact-form').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const btn = this.querySelector('button[type=submit]');
+  btn.textContent = 'Sending...';
+  btn.disabled = true;
+  setTimeout(() => {
+    btn.style.display = 'none';
+    document.getElementById('form-success').style.display = 'block';
+    this.reset();
+  }, 1500);
+});
+
+/* ---- Nav bg on scroll ---- */
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  navbar.style.background = window.scrollY > 60
+    ? (html.getAttribute('data-theme')==='dark' ? 'rgba(10,15,30,0.95)' : 'rgba(248,250,255,0.95)')
+    : (html.getAttribute('data-theme')==='dark' ? 'rgba(10,15,30,0.8)' : 'rgba(248,250,255,0.85)');
+});
+</script>
+</body>
+</html>
